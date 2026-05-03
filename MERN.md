@@ -1,8 +1,7 @@
----
-
 # ✅ PROJECT STRUCTURE MERN
 
-```id="final_tree_001"
+```js
+id="final_tree_001"
 /
 │
 ├── src/
