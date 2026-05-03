@@ -1,0 +1,301 @@
+---
+
+# **✅ Complete Laravel Scaffold Skill – Ready for AI Use**
+
+## **Skill Name:** `laravel-scaffold`
+
+---
+
+## **Description**
+
+Generate **production-grade Laravel applications** with a strict layered architecture, repository pattern, service-driven business logic, caching, authentication, Docker support, and enterprise-level structure.
+
+**Use this skill whenever a user asks to:**
+
+* Create a new Laravel project (API or fullstack)
+* Build scalable backend systems
+* Generate REST APIs with authentication
+* Develop SaaS, E-Commerce, or enterprise systems
+* Get production-ready Laravel architecture with Docker, queues, and caching
+
+---
+
+# **🏗 Core Architecture (Strict Layered Pattern)**
+
+**Request → Route → Controller → Service → Repository → Model → Database**
+
+| Layer          | Responsibility                           | Must NOT Do    |
+| -------------- | ---------------------------------------- | -------------- |
+| **Route**      | Define endpoints + middleware            | Logic          |
+| **Controller** | Handle request/response formatting       | Business logic |
+| **Service**    | Business logic layer                     | DB queries     |
+| **Repository** | Data access layer (Eloquent abstraction) | Business logic |
+| **Model**      | Eloquent ORM only                        | Logic          |
+| **Migration**  | Database schema                          | Logic          |
+
+---
+
+# **⚙️ Core Production Features (Always Included)**
+
+* Laravel Sanctum / Passport (JWT-style auth)
+* Role-Based Access Control (RBAC)
+* Repository + Service pattern enforcement
+* Redis caching with fallback handling
+* Queue system (Redis / database driver)
+* Event-driven architecture (Laravel Events)
+* Request validation using Form Requests
+* Centralized API response helper
+* Exception handler customization
+* Logging via Monolog (no `dd()` in production)
+* Docker + Docker Compose (MySQL/PostgreSQL + Redis)
+* Health check endpoint
+* Rate limiting middleware
+* API versioning (/api/v1)
+
+---
+
+# **📁 Project Structure Generated**
+
+```bash
+laravel-app/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   ├── Middleware/
+│   │   ├── Requests/
+│   ├── Services/
+│   ├── Repositories/
+│   ├── Models/
+│   ├── Events/
+│   ├── Jobs/
+│   ├── Listeners/
+│   ├── Helpers/
+│
+├── routes/
+│   ├── api.php
+│   ├── web.php
+│
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   ├── factories/
+│
+├── config/
+├── docker/
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── tests/
+├── .env.example
+├── README.md
+└── artisan
+```
+
+---
+
+# **🧠 Layer Responsibilities**
+
+## **Route Layer**
+
+* Only maps endpoints
+* Applies middleware
+* No logic allowed
+
+```php
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+});
+```
+
+---
+
+## **Controller Layer**
+
+* Accept request
+* Call service
+* Return formatted response
+
+```php
+public function index(UserService $service)
+{
+    return response()->json($service->getAllUsers());
+}
+```
+
+---
+
+## **Service Layer (Business Logic Core)**
+
+```php
+public function getAllUsers()
+{
+    return $this->userRepository->all();
+}
+```
+
+---
+
+## **Repository Layer (Data Access)**
+
+```php
+public function all()
+{
+    return User::all();
+}
+```
+
+---
+
+## **Model Layer**
+
+```php
+class User extends Model
+{
+    protected $fillable = ['name', 'email', 'password'];
+}
+```
+
+---
+
+# **⚡ Standard API Response Helper**
+
+```php
+return response()->json([
+    'status' => 'success',
+    'message' => $message,
+    'data' => $data
+], 200);
+```
+
+---
+
+# **🧩 Cache Pattern (Redis with Fallback)**
+
+```php
+return Cache::remember('users', 60, function () {
+    return $this->userRepository->all();
+});
+```
+
+---
+
+# **🔐 Authentication System**
+
+* Laravel Sanctum (default)
+* Token-based API auth
+* Optional Passport OAuth2
+* Role-based middleware
+
+```php
+Route::middleware(['auth:sanctum', 'role:admin'])->group(...);
+```
+
+---
+
+# **📦 Queue System (Always Included if Needed)**
+
+```php
+dispatch(new SendEmailJob($user));
+```
+
+Supports:
+
+* Email jobs
+* Notifications
+* Background processing
+
+---
+
+# **🐳 Docker Support**
+
+Includes:
+
+* PHP + Apache/Nginx
+* MySQL/PostgreSQL
+* Redis
+* Laravel queue worker
+
+```bash
+docker-compose up -d
+```
+
+---
+
+# **🔐 Security Features**
+
+* CSRF protection (web)
+* Rate limiting (API throttling)
+* Input validation (Form Requests)
+* Password hashing (bcrypt/argon2)
+* SQL injection protection (Eloquent ORM)
+* CORS middleware
+* Secure headers
+
+---
+
+# **📊 Supported Application Types**
+
+Pre-built architectural patterns for:
+
+* 🛒 E-Commerce (products, cart, orders, payments)
+* 🧑‍💼 SaaS platforms (subscriptions, teams, billing)
+* 📱 Social networks (posts, likes, comments, followers)
+* 📚 Learning platforms (courses, lessons, quizzes)
+* 🏢 CRM / ERP systems
+* 📊 Admin dashboards
+* 🚚 Delivery systems
+* 🎵 Media streaming apps
+
+---
+
+# **🚀 How to Use This Skill**
+
+## Simple Request:
+
+> "Generate a Laravel blog system with posts and comments"
+
+## Advanced Request:
+
+> "Create a Laravel SaaS app with teams, subscriptions, Stripe billing, RBAC, Redis caching, queues, and Docker"
+
+---
+
+# **🧪 Generation Workflow (Always Followed)**
+
+1. Clarify domain & features
+2. Design database schema
+3. Create migrations + models
+4. Build repository layer
+5. Add service layer logic
+6. Implement controllers
+7. Wire routes + middleware
+8. Add caching + queues if needed
+9. Add Docker setup
+10. Generate README + .env.example
+11. Ensure strict separation of concerns
+
+---
+
+# **📌 Key Design Principles**
+
+* Controllers stay thin
+* Services contain all logic
+* Repositories handle all DB access
+* Models are purely ORM definitions
+* No business logic in routes/controllers
+* Fully testable architecture
+
+---
+
+# **🎯 Example Request**
+
+> "Create a Laravel e-commerce system with products, cart, orders, payments (Stripe), admin dashboard, Redis caching, and Docker setup"
+
+---
+
+# **⚡ Skill Status: Production Ready**
+
+* Clean architecture
+* Scalable structure
+* Production-ready patterns
+* Full DevOps support
+* Enterprise-grade security
